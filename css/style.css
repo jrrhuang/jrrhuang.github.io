@@ -30,15 +30,39 @@ main {
     }
 }
 
+/* Header = TWO-COLUMN FLEX: the text block FLEXES to fill the left side, so the old
+   own-row layout's void (name orphaned below a right-aligned photo) cannot form. This keeps
+   every earlier rule: photo top right, FULL FRAME, never cropped (width-only sizing), no
+   text wrap-around. The prior "own row" note's three-outcome analysis missed this fourth:
+   a flexible text column beside a 220px portrait leaves no hole at any viewport ≥ 600px. */
 header {
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 36px;
+}
+.header-text { flex: 1; min-width: 0; }
+.portrait {
+    display: block;
+    width: 220px;
+    height: auto;            /* full frame — width is the only lever, never cropped */
+    flex: 0 0 auto;
+    margin-right: 30px;      /* breathe off the card edge — photo sits toward the middle */
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(15, 15, 15, 0.06), 0 6px 18px rgba(15, 15, 15, 0.08);
+}
+@media (max-width: 600px) {
+    header { flex-direction: column-reverse; align-items: flex-start; gap: 24px; }
+    .portrait { width: 200px; align-self: center; }
 }
 
 h1 {
-    font-size: 2.3em;
+    font-size: 2.6em;
     font-weight: 700;
     color: #111;
-    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 8px;
 }
 
 .subtitle {
@@ -48,7 +72,7 @@ h1 {
 
 .affiliation {
     color: #777;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 h2 {
@@ -142,4 +166,15 @@ a {
     background: #0066cc;
     border-color: #0066cc;
     color: #fff;
+}
+
+/* Projects — LTNT showcase */
+.project { margin-bottom: 1.75rem; }
+.project-media {
+    width: 100%;
+    max-width: 640px;
+    border-radius: 8px;
+    display: block;
+    margin: 0 0 0.85rem;
+    background: #000;
 }
